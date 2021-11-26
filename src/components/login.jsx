@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { ToastContainer, toast } from 'react-toastify';
+import { Navigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 
 class Login extends React.Component {
@@ -8,9 +9,13 @@ class Login extends React.Component {
         this.state = {
             email : '',
             password : '',
+            redirect: null
         }
     }
     render() { 
+        if (this.state.redirect) {
+            return <Navigate to={this.state.redirect} />
+        }
         return (
             <Fragment>
                 <ToastContainer
@@ -50,7 +55,7 @@ class Login extends React.Component {
         formData.append('username', this.state.email);
         formData.append('password', this.state.password);
 
-        fetch("", {
+        fetch("http://152.67.25.103/api/login/access-token", {
             method: 'POST',
             body: formData
         })
@@ -61,7 +66,10 @@ class Login extends React.Component {
             }
             else if(response.status == 200){
                 response.json()
-                .then(data => console.log(data.access_token))
+                .then(data => {
+                    localStorage.setItem('access-token', data.access_token)
+                    this.setState({redirect: "/question"})
+                })
             }
         })
     }

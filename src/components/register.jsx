@@ -1,6 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import $, { timers } from 'jquery';
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import { Navigate } from "react-router-dom";
 
 class Register extends React.Component {
     constructor(props){
@@ -9,11 +11,25 @@ class Register extends React.Component {
             name : '',
             email : '',
             password : '',
+            redirect: null
         }
     }
     
     render() {
+        if (this.state.redirect) {
+            return <Navigate to={this.state.redirect} />
+        }
         return (
+            <Fragment>
+            <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    />
             <div className="register-container d-flex align-items-center" >
                 <form id="register-form-container" className="container border rounded">
                     <h3>Register</h3>
@@ -39,6 +55,7 @@ class Register extends React.Component {
                     </p>
                 </form>
             </div>
+            </Fragment>
         );
     }
 
@@ -59,8 +76,16 @@ class Register extends React.Component {
                 'Content-Type': 'application/json'
             },
         })
-        .then(response => console.log(response))
-        .then(data => console.log(data));
+        .then(response => {
+            if(response.status >= 400){
+                response.json()
+                .then(data => toast.error(data.detail))
+            }
+            else if(response.status == 200){
+                response.json()
+                .then(data => this.setState({redirect: "/question"}))
+            }
+        });
           
     }
 

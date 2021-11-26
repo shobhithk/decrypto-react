@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Login from "./components/login";
 import Register from "./components/register";
 import Main from "./components/main";
-import Leaderboard from "./components/leaderboard";
+// import Leaderboard from "./components/leaderboard";
 
 function App() {
   return (
