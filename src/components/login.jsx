@@ -32,8 +32,8 @@ class Login extends React.Component {
                         <h3>Login</h3>
 
                         <div className="form-group m-2">
-                            <label>Username</label>
-                            <input type="text" className="form-control" placeholder="Username" onChange={event => this.updateEmail(event)} />
+                            <label>Email</label>
+                            <input type="text" className="form-control" placeholder="Email" onChange={event => this.updateEmail(event)} />
                         </div>
 
                         <div className="form-group m-2">

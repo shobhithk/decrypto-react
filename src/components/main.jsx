@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import {Navbar, Container, Nav, Image} from 'react-bootstrap'
+import { ToastContainer, toast } from 'react-toastify';
 import { data } from "jquery";
 
 class Main extends React.Component {
@@ -22,7 +23,13 @@ class Main extends React.Component {
 				'accept': 'application/json'
 			}
 		}).then(response => response.json())
-		.then(data => console.log(data))
+		.then(data => {
+      let image_url = data.content
+      let content_type = data.content_type
+      this.setState({
+        image_url: 'data:' + content_type + ";base64," + image_url
+      })
+    })
 	}
   render() { 
       return (
@@ -40,8 +47,17 @@ class Main extends React.Component {
                   </Navbar.Collapse>
                 </Container>
               </Navbar>
+              <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    />
               <div>
-                <img src={this.state.image_url} alt="question image" />
+                <img width="60%" src={this.state.image_url} alt="question image" />
                 <br />
                 <input type="text" placeholder="Answer" onChange={event => this.updateAnswer(event)} />
                 <button onClick={(event) => this.submitAnswer(event)} >Submit</button>
@@ -53,6 +69,35 @@ class Main extends React.Component {
   }
   submitAnswer = (event) => {
     event.preventDefault()
+
+    let answer = {
+      "answer": this.state.answer
+    }
+    let data = JSON.stringify(answer)
+    console.log(data)
+
+    fetch("http://152.67.25.103/api/users/answer", {
+			method: 'POST',
+			headers: {
+				"Authorization": "bearer " + localStorage.getItem('access-token'),
+				'Content-Type': 'application/json',
+			},
+      body: data
+		}).then(response => {
+      if(response.status == 400){
+        response.json()
+        .then(data => toast.error(data.detail))
+      }
+      else if(response.status == 200){
+        response.json()
+        .then(data => {
+          toast("Correct answer");
+          this.fetchQuestion()
+        })
+      }
+    })
+    .then(data => console.log(data))
+
     
   }
   updateAnswer(event) {
