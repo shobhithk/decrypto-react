@@ -83,7 +83,7 @@ class Register extends React.Component {
             }
             else if(response.status == 200){
                 response.json()
-                .then(data => this.setState({redirect: "/question"}))
+                .then(data => this.setState({redirect: "/login"}))
             }
         });
           

@@ -9,7 +9,8 @@ class Main extends React.Component {
     super(props)
     this.state = {
       image_url: '',
-      answer: ''
+      answer: '',
+      all_answered: false
     }
   }
 	componentDidMount(){
@@ -22,21 +23,68 @@ class Main extends React.Component {
 				"Authorization": "bearer " + localStorage.getItem('access-token'),
 				'accept': 'application/json'
 			}
-		}).then(response => response.json())
-		.then(data => {
-      let image_url = data.content
-      let content_type = data.content_type
-      this.setState({
-        image_url: 'data:' + content_type + ";base64," + image_url
+		}).then(response => {
+      console.log(response)
+      if(response.redirected == true){
+        this.setState({all_answered: true})
+        return
+      }
+      response.json()
+      .then(data => {
+        console.log(data)
+        let image_url = data.content
+        let content_type = data.content_type
+        this.setState({
+          image_url: 'data:' + content_type + ";base64," + image_url
+        })
       })
     })
+		
 	}
-  render() { 
+  render() {
+    if(this.state.all_answered){
+      return (
+        <div>
+          {this.renderNavbar()}
+          All questions answered
+        </div>
+      )
+    }
       return (
           <div>
-              <Navbar bg="dark" expand="lg" variant="dark">
+              {this.renderNavbar()}
+              <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    />
+              <div className="container d-flex flex-column p-4" style={{height: "90vh"}}> 
+                <div className="d-inline-block" style={{height: "85%"}}>
+                <Image className="h-100" src={this.state.image_url} fluid />
+                  {/* <img className="mx-auto" height="100%" src={this.state.image_url} alt="question image" /> */}
+                </div>
+                <div className="input-group my-3">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text" id="inputGroup-sizing-default">Answer</span>
+                  </div>
+                  <input type="text " className="form-control" aria-label="Sizing example input" onChange={event => this.updateAnswer(event)} aria-describedby="inputGroup-sizing-default"/>
+                </div>
+                <button type="button" className="btn btn-dark" onClick={(event) => this.submitAnswer(event)} >Submit</button>
+              </div>
+              
+          </div>
+          
+      );
+  }
+  renderNavbar(){
+    return (
+      <Navbar bg="dark" expand="lg" variant="dark">
                 <Container>
-                  <Navbar.Brand href="#home">Decrypto</Navbar.Brand>
+                  <Navbar.Brand href="#home">Decrypto 2k21</Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse className="justify-content-end mx-2" id="basic-navbar-nav">
                     <Nav className="">
@@ -47,25 +95,7 @@ class Main extends React.Component {
                   </Navbar.Collapse>
                 </Container>
               </Navbar>
-              <ToastContainer
-                    position="top-center"
-                    autoClose={5000}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    />
-              <div>
-                <img width="60%" src={this.state.image_url} alt="question image" />
-                <br />
-                <input type="text" placeholder="Answer" onChange={event => this.updateAnswer(event)} />
-                <button onClick={(event) => this.submitAnswer(event)} >Submit</button>
-              </div>
-              
-          </div>
-          
-      );
+    )
   }
   submitAnswer = (event) => {
     event.preventDefault()

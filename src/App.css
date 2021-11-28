@@ -46,6 +46,10 @@
   width: 50%;
 }
 
+.questionContainer {
+  height: 100px;
+}
+
 @media (max-width: 576px) {
   #login-form-container,
   #register-form-container {
