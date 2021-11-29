@@ -28,8 +28,8 @@ class Login extends React.Component {
                     pauseOnHover
                     />
                     <div className="login-container d-flex align-items-center" >
-                    <form id="login-form-container" className="container border rounded">
-                        <h3>Login</h3>
+                    <form id="login-form-container" className="container border rounded shadow">
+                        <h3 className="py-3">Login</h3>
 
                         <div className="form-group m-2">
                             <label>Email</label>
@@ -68,7 +68,25 @@ class Login extends React.Component {
                 response.json()
                 .then(data => {
                     localStorage.setItem('access-token', data.access_token)
+                    this.getUserDetails()
                     this.setState({redirect: "/question"})
+                })
+            }
+        })
+    }
+
+    getUserDetails(){
+        fetch("http://152.67.25.103/api/users/me", {
+            method: 'GET',
+            headers: {
+                "Authorization": "bearer " + localStorage.getItem('access-token'),
+                'accept': 'application/json'
+			}
+        }).then(response => {
+            if(response.status == 200){
+                response.json()
+                .then(data => {
+                    localStorage.setItem('full_name', data.full_name)
                 })
             }
         })

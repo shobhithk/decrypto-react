@@ -14,6 +14,7 @@ class Main extends React.Component {
     }
   }
 	componentDidMount(){
+    toast("Welcome " + localStorage.getItem('full_name'))
 		this.fetchQuestion()
 	}
 	fetchQuestion() {
