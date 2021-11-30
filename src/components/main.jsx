@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import {Navbar, Container, Nav, Image} from 'react-bootstrap'
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { data } from "jquery";
 
@@ -47,7 +48,9 @@ class Main extends React.Component {
       return (
         <div>
           {this.renderNavbar()}
-          All questions answered
+          <div>
+            Congratulations
+          </div>
         </div>
       )
     }
@@ -89,9 +92,9 @@ class Main extends React.Component {
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse className="justify-content-end mx-2" id="basic-navbar-nav">
                     <Nav className="">
-                      <Nav.Link className="mx-3" href="">Rules</Nav.Link>
-                      <Nav.Link className="mx-3" href="">Leaderboard</Nav.Link>
-                      <Nav.Link className="mx-3" href="">Logout</Nav.Link>
+                      <Link className="mx-3 nav-link" to="">Rules</Link>
+                      <Link className="mx-3 nav-link" to="/leaderboard">Leaderboard</Link>
+                      <Link className="mx-3 nav-link" to="">Logout</Link>
                     </Nav>
                   </Navbar.Collapse>
                 </Container>
