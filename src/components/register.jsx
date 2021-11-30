@@ -3,6 +3,7 @@ import $, { timers } from 'jquery';
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { Navigate } from "react-router-dom";
+import { BASE_URL } from "../App";
 
 class Register extends React.Component {
     constructor(props){
@@ -69,7 +70,7 @@ class Register extends React.Component {
         const data = JSON.stringify(details)
         console.log(data);
 
-        fetch("http://152.67.25.103/api/users/open", {
+        fetch( BASE_URL + "users/open", {
             method: 'POST',
             body: data,
             headers: {

@@ -1,4 +1,5 @@
 import React from "react";
+import { BASE_URL } from "../App";
 
 class Leaderboard extends React.Component {0
     constructor(props){
@@ -16,7 +17,7 @@ class Leaderboard extends React.Component {0
         this.getCurrentUserInfo()
     }
     fetchLeaderboard(){
-        fetch("http://152.67.25.103/api/users/leaderboard?skip=" + this.skip + "&limit=" + this.limit, {
+        fetch(BASE_URL + "users/leaderboard?skip=" + this.skip + "&limit=" + this.limit, {
             method: 'GET',
             headers: {
                 'accept': 'application/json'
@@ -33,7 +34,7 @@ class Leaderboard extends React.Component {0
         })
     }
     getCurrentUserInfo(){
-        fetch("http://152.67.25.103/api/users/me", {
+        fetch(BASE_URL + "users/me", {
 			method: 'GET',
 			headers: {
 				"Authorization": "bearer " + localStorage.getItem('access-token'),

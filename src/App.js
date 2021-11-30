@@ -22,4 +22,5 @@ function App() {
   );
 }
 
+export const BASE_URL = "http://152.67.25.103/api/";
 export default App;

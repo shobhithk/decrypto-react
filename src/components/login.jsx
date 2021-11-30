@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import { Navigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from "../App";
 
 class Login extends React.Component {
     constructor(props){
@@ -55,7 +56,7 @@ class Login extends React.Component {
         formData.append('username', this.state.email);
         formData.append('password', this.state.password);
 
-        fetch("http://152.67.25.103/api/login/access-token", {
+        fetch(BASE_URL + "login/access-token", {
             method: 'POST',
             body: formData
         })
@@ -76,7 +77,7 @@ class Login extends React.Component {
     }
 
     getUserDetails(){
-        fetch("http://152.67.25.103/api/users/me", {
+        fetch(BASE_URL + "users/me", {
             method: 'GET',
             headers: {
                 "Authorization": "bearer " + localStorage.getItem('access-token'),

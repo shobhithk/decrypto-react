@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {Navbar, Container, Nav, Image} from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
-import { data } from "jquery";
+import {BASE_URL} from '../App.js'
 
 class Main extends React.Component {
   constructor(props){
@@ -19,7 +19,7 @@ class Main extends React.Component {
 		this.fetchQuestion()
 	}
 	fetchQuestion() {
-		fetch("http://152.67.25.103/api/users/question", {
+		fetch(BASE_URL + "users/question", {
 			method: 'GET',
 			headers: {
 				"Authorization": "bearer " + localStorage.getItem('access-token'),
@@ -110,7 +110,7 @@ class Main extends React.Component {
     let data = JSON.stringify(answer)
     console.log(data)
 
-    fetch("http://152.67.25.103/api/users/answer", {
+    fetch(BASE_URL + "users/answer", {
 			method: 'POST',
 			headers: {
 				"Authorization": "bearer " + localStorage.getItem('access-token'),
@@ -125,7 +125,6 @@ class Main extends React.Component {
       else if(response.status == 200){
         response.json()
         .then(data => {
-          toast("Correct answer");
           this.fetchQuestion()
         })
       }
