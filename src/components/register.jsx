@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { Navigate } from "react-router-dom";
 import { BASE_URL } from "../App";
+import 'bootstrap/dist/css/bootstrap.css';
+import {Navbar, Container, Nav, Image} from 'react-bootstrap'
 
 class Register extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             name : '',
+            username: '',
             email : '',
             password : '',
             redirect: null
@@ -22,6 +25,19 @@ class Register extends React.Component {
         }
         return (
             <Fragment>
+            <Navbar bg="dark" expand="lg" variant="dark">
+                <Container>
+                  <Navbar.Brand href="#home">Decrypto 2k21</Navbar.Brand>
+                  <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                  <Navbar.Collapse className="justify-content-end mx-2" id="basic-navbar-nav">
+                    <Nav className="">
+                      <Link className="mx-3 nav-link" to="/rules">Rules</Link>
+                      <Link className="mx-3 nav-link disabled" to="/leaderboard">Leaderboard <i class="bi bi-lock-fill"></i></Link>
+                      <Link className="mx-3 nav-link disabled" to="">Logout <i class="bi bi-lock-fill"></i></Link>
+                    </Nav>
+                  </Navbar.Collapse>
+                </Container>
+            </Navbar>
             <ToastContainer
                     position="top-center"
                     autoClose={5000}
@@ -31,13 +47,21 @@ class Register extends React.Component {
                     draggable
                     pauseOnHover
                     />
-            <div className="register-container d-flex align-items-center" >
-                <form id="register-form-container" className="container border rounded">
+            <div className="register-container d-flex align-items-center  justify-content-center" >
+                <form id="register-form-container" className="container border rounded shadow m-2">
+                    <div class="p-3">
+                        <img width={100} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo7kHT9XYYCnVNBIrKcz7Z-b3mwtnJj-0y_tsgvEc0k8WdHVJA4T2jskYT6nElVcskZpY&usqp=CAU" alt="" />
+                    </div>
                     <h3>Register</h3>
 
                     <div className="form-group m-2">
                         <label>Name</label>
                         <input type="text" className="form-control" placeholder="Name" onChange={event => this.updateName(event)} />
+                    </div>
+
+                    <div className="form-group m-2">
+                        <label>Username</label>
+                        <input type="text" className="form-control" placeholder="Username" onChange={event => this.updateUsername(event)} />
                     </div>
 
                     <div className="form-group m-2">
@@ -65,6 +89,7 @@ class Register extends React.Component {
         const details = {
             "full_name": this.state.name.toString(),
             "email": this.state.email.toString(),
+            "username": this.state.username.toString(),
             "password": this.state.password.toString()
         }
         const data = JSON.stringify(details)
@@ -78,14 +103,20 @@ class Register extends React.Component {
             },
         })
         .then(response => {
-            if(response.status >= 400){
-                response.json()
-                .then(data => toast.error(data.detail))
-            }
-            else if(response.status == 200){
-                response.json()
-                .then(data => this.setState({redirect: "/login"}))
-            }
+            console.log(response)
+            let status = response.status
+            response.json()
+            .then(data => {
+                if(status == 400){
+                    toast.error(data.detail)
+                }
+                else if(status == 422){
+                    toast.error(data.detail[0].msg)
+                }
+                else if(status == 200){
+                    this.setState({redirect: "/login"})
+                }
+            })
         });
           
     }
@@ -93,6 +124,11 @@ class Register extends React.Component {
     updateName(event){
         this.setState({
             name: event.target.value
+        })
+    }
+    updateUsername(event){
+        this.setState({
+            username: event.target.value
         })
     }
     updateEmail(event){

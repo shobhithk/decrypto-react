@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
-import {Navbar, Container, Nav, Image} from 'react-bootstrap'
+import {Navbar, Container, Nav, Image, Button} from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import {BASE_URL} from '../App.js'
+import { Navigate, useNavigate } from 'react-router-dom';
+import Leaderboard from "./leaderboard.jsx";
+import Congratulations from "./congratulations.jsx";
 
 class Main extends React.Component {
   constructor(props){
@@ -11,11 +14,11 @@ class Main extends React.Component {
     this.state = {
       image_url: '',
       answer: '',
+      question_number: 0,
       all_answered: false
     }
   }
 	componentDidMount(){
-    toast("Welcome " + localStorage.getItem('full_name'))
 		this.fetchQuestion()
 	}
 	fetchQuestion() {
@@ -26,31 +29,44 @@ class Main extends React.Component {
 				'accept': 'application/json'
 			}
 		}).then(response => {
-      console.log(response)
       if(response.redirected == true){
         this.setState({all_answered: true})
         return
       }
       response.json()
       .then(data => {
-        console.log(data)
         let image_url = data.content
         let content_type = data.content_type
         this.setState({
           image_url: 'data:' + content_type + ";base64," + image_url
         })
+        this.updateQuestionNumber()
       })
     })
-		
 	}
+  updateQuestionNumber() {
+    fetch(BASE_URL + "users/me", {
+      method: 'GET',
+      headers: {
+          "Authorization": "bearer " + localStorage.getItem('access-token'),
+          'accept': 'application/json'
+      }
+      }).then(response => {
+          if(response.status == 200){
+              response.json()
+              .then(data => {
+                  this.setState({question_number: data.question_number})
+              })
+          }
+      })
+  }
   render() {
+    
     if(this.state.all_answered){
       return (
         <div>
           {this.renderNavbar()}
-          <div>
-            Congratulations
-          </div>
+          <Congratulations></Congratulations>
         </div>
       )
     }
@@ -59,25 +75,25 @@ class Main extends React.Component {
               {this.renderNavbar()}
               <ToastContainer
                     position="top-center"
-                    autoClose={5000}
+                    autoClose={3000}
                     closeOnClick
                     rtl={false}
                     pauseOnFocusLoss
                     draggable
                     pauseOnHover
                     />
-              <div className="container d-flex flex-column p-4" style={{height: "90vh"}}> 
-                <div className="d-inline-block" style={{height: "85%"}}>
-                <Image className="h-100" src={this.state.image_url} fluid />
-                  {/* <img className="mx-auto" height="100%" src={this.state.image_url} alt="question image" /> */}
+              <div className="container d-flex flex-column p-4" style={{height: "90vh"}}>
+                <div className="h3 text-white">Question {this.state.question_number}</div>
+                <div className="d-flex align-items-center justify-content-center" style={{height: "85%"}}>
+                  <Image id="questionImage" className="" src={this.state.image_url} />
                 </div>
                 <div className="input-group my-3">
                   <div className="input-group-prepend">
                     <span className="input-group-text" id="inputGroup-sizing-default">Answer</span>
                   </div>
-                  <input type="text " className="form-control" aria-label="Sizing example input" onChange={event => this.updateAnswer(event)} aria-describedby="inputGroup-sizing-default"/>
+                  <input type="text" id="answer" className="form-control" aria-label="Sizing example input" onChange={event => this.updateAnswer(event)} aria-describedby="inputGroup-sizing-default"/>
                 </div>
-                <button type="button" className="btn btn-dark" onClick={(event) => this.submitAnswer(event)} >Submit</button>
+                <button type="button" className="btn btn-dark mb-2" onClick={(event) => this.submitAnswer(event)} >Submit</button>
               </div>
               
           </div>
@@ -92,23 +108,26 @@ class Main extends React.Component {
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse className="justify-content-end mx-2" id="basic-navbar-nav">
                     <Nav className="">
-                      <Link className="mx-3 nav-link" to="">Rules</Link>
+                      <Link className="mx-3 nav-link" to="/rules">Rules</Link>
                       <Link className="mx-3 nav-link" to="/leaderboard">Leaderboard</Link>
-                      <Link className="mx-3 nav-link" to="">Logout</Link>
+                      <Link className="mx-3 nav-link" to="" onClick={this.logout}>Logout</Link>
                     </Nav>
                   </Navbar.Collapse>
                 </Container>
               </Navbar>
     )
   }
+  logout = () => {
+    localStorage.clear();
+    window.location.href = '/home';
+  }
   submitAnswer = (event) => {
     event.preventDefault()
-
+    document.getElementById("answer").value = "";
     let answer = {
       "answer": this.state.answer
     }
     let data = JSON.stringify(answer)
-    console.log(data)
 
     fetch(BASE_URL + "users/answer", {
 			method: 'POST',
@@ -129,7 +148,6 @@ class Main extends React.Component {
         })
       }
     })
-    .then(data => console.log(data))
 
     
   }
