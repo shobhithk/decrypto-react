@@ -8,6 +8,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import Leaderboard from "./leaderboard.jsx";
 import Congratulations from "./congratulations.jsx";
 import ContestNotLive from "./contestNotLive.jsx";
+import Countdown from 'react-countdown';
 
 class Main extends React.Component {
   constructor(props){
@@ -127,7 +128,10 @@ class Main extends React.Component {
                     draggable
                     pauseOnHover
                     />
-              <div className="container d-flex flex-column p-4" style={{height: "90vh"}}>
+              <div className="container d-flex flex-column p-4" style={{height: "80vh"}}>
+                {this.renderCountdown()}
+                
+                
                 <div className="h3 text-white">Question {this.state.question_number}</div>
                 <div className="d-flex align-items-center justify-content-center" style={{height: "85%"}}>
                   <Image id="questionImage" className="" src={this.state.image_url} />
@@ -145,6 +149,20 @@ class Main extends React.Component {
           
       );
   }
+  renderCountdown() {
+    const renderer = ({ days, hours, minutes, seconds, completed }) => {
+      if (completed) {
+        window.location.reload()
+      } else {
+        return <span className="h4">{("0" + days.toString()).slice(-2)} : {("0" + hours.toString()).slice(-2)} : {("0" + minutes.toString()).slice(-2)} : {("0" + seconds.toString()).slice(-2)}</span>;
+      }
+    };
+    if(this.state.endTime !== null){
+      return  <Countdown className="h4" date={this.state.endTime} renderer={renderer} zeroPadTime={2} zeroPadDays={2}/>
+    }
+  }
+  
+  
   renderNavbar(){
     return (
       <Navbar bg="dark" expand="lg" variant="dark">

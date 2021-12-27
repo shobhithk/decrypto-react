@@ -21,14 +21,17 @@ body {
   /* background-image: url("https://kmoodycgma.files.wordpress.com/2011/01/spiderman-texture.jpg"); */
   background-size: cover;
 
-  background-image: radial-gradient(
+  /* background-image: radial-gradient(
       circle,
       rgba(0, 0, 0, 0.61) 0%,
       rgba(0, 0, 0, 0.712) 100%
     ),
-    url("https://kmoodycgma.files.wordpress.com/2011/01/spiderman-texture.jpg");
+    url("https://kmoodycgma.files.wordpress.com/2011/01/spiderman-texture.jpg"); */
+  background-color: peachpuff;
 }
-
+.formLabel {
+  text-align: left;
+}
 .register-container,
 .login-container {
   min-height: 90vh;

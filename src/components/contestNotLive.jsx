@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ContestEnd from './contestEnd';
+import ContestNotStarted from './contestNotStarted';
 
 class ContestNotLive extends Component {
     constructor(props) {
@@ -12,11 +13,8 @@ class ContestNotLive extends Component {
         if(new Date().getTime() > this.props.endTime){
             return <ContestEnd />
         }
-        return (
-            <div>
-                Contest not live {this.props.startTime}
-            </div>
-        );
+        else if(new Date().getTime() < this.props.startTime)
+        return <ContestNotStarted startTime = {this.props.startTime} />
     }
 }
  

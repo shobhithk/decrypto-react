@@ -10,13 +10,14 @@ class Leaderboard extends React.Component {
     
     constructor(props){
         super(props)
+        this.ranksInPage = 10
         this.state = {
             rank_list: [],
-            current_user_info: {}
+            current_user_info: {},
+            start: 0,
+            end: this.ranksInPage
         }
-        this.ranksInPage = 10
-        this.skip = 0
-        this.limit = this.ranksInPage
+        
         
     }
     componentDidMount(){
@@ -24,7 +25,7 @@ class Leaderboard extends React.Component {
         this.getCurrentUserInfo()
     }
     fetchLeaderboard(){
-        fetch(BASE_URL + "users/leaderboard?skip=" + this.skip + "&limit=" + this.limit, {
+        fetch(BASE_URL + "users/leaderboard?skip=0&limit=500", {
             method: 'GET',
             headers: {
                 'accept': 'application/json'
@@ -34,9 +35,6 @@ class Leaderboard extends React.Component {
             if(data.length != 0){
                 console.log(data)
                 this.setState({rank_list: data})
-            }
-            else {
-                this.skip -= this.ranksInPage
             }
             
         })
@@ -60,7 +58,7 @@ class Leaderboard extends React.Component {
             <Fragment>
             <Navbar bg="dark" expand="lg" variant="dark">
                 <Container>
-                  <Navbar.Brand href="#home">Decrypto 2k21</Navbar.Brand>
+                  <Navbar.Brand href="">Decrypto 2k21</Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse className="justify-content-end mx-2" id="basic-navbar-nav">
                     <Nav className="">
@@ -121,16 +119,18 @@ class Leaderboard extends React.Component {
         window.location.href = '/home';
     }
     nextPage = () => {
-        
-        this.skip += this.ranksInPage
-        this.fetchLeaderboard()
-    }
-    previousPage = () => {
-        if(this.skip == 0){
+        if(this.state.start > this.state.rank_list.length){
             return
         }
-        this.skip -= this.ranksInPage
-        this.fetchLeaderboard()
+        this.setState({start: this.state.start + this.ranksInPage})
+    }
+    previousPage = () => {
+        if(this.state.start - this.ranksInPage < 0){
+            this.setState({start: 0})
+        }
+        else {
+            this.setState({start: this.state.start - this.ranksInPage})
+        }
     }
     renderTables(){
         return (
@@ -160,7 +160,7 @@ class Leaderboard extends React.Component {
                     </tr>
                     <tr className="table-success" id="friend-row">
                     </tr>
-                    {this.state.rank_list.map(data => {
+                    {this.state.rank_list.slice(this.state.start, this.state.start + this.state.end).map(data => {
                         return (
                             <tr key={data.rank}>
                                 <td>{data.rank}</td>

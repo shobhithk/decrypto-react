@@ -6,6 +6,7 @@ import { BASE_URL } from "../App";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import {Navbar, Container, Nav, Image} from 'react-bootstrap'
+import logo from '../images/lcc_icon.png'
 
 
 class Login extends React.Component {
@@ -25,13 +26,12 @@ class Login extends React.Component {
             <Fragment>
                 <Navbar bg="dark" expand="lg" variant="dark">
                     <Container>
-                      <Navbar.Brand href="#home">Decrypto 2k21</Navbar.Brand>
+                      <Navbar.Brand href="/home">Decrypto 2k21</Navbar.Brand>
                       <Navbar.Toggle aria-controls="basic-navbar-nav" />
                       <Navbar.Collapse className="justify-content-end mx-2" id="basic-navbar-nav">
                         <Nav className="">
                           <Link className="mx-3 nav-link" to="/rules">Rules</Link>
-                          <Link className="mx-3 nav-link disabled" to="/leaderboard">Leaderboard <i class="bi bi-lock-fill"></i></Link>
-                          <Link className="mx-3 nav-link disabled" to="">Logout <i class="bi bi-lock-fill"></i></Link>
+                          <Link className="mx-3 nav-link" to="/leaderboard">Leaderboard</Link>
                         </Nav>
                       </Navbar.Collapse>
                     </Container>
@@ -50,17 +50,21 @@ class Login extends React.Component {
                         
                         <form id="login-form-container" className="container border rounded shadow m-2 ">
                             <div class="p-3">
-                                <img width={100} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo7kHT9XYYCnVNBIrKcz7Z-b3mwtnJj-0y_tsgvEc0k8WdHVJA4T2jskYT6nElVcskZpY&usqp=CAU" alt="" />
+                                <img width={100} src={logo} alt="" />
                             </div>
                             <h3 className="py-3">Login</h3>
 
-                            <div className="form-group m-2">
-                                <label>Username or Email</label>
-                                <input type="text" className="form-control" placeholder="Username or Email" onChange={event => this.updateEmail(event)} />
+                            <div className=" m-2">
+                                <div className="formLabel p-1 py-2">
+                                    Username or Email
+                                </div>
+                                <input id="usernname" type="text" className="form-control" placeholder="Username or Email" onChange={event => this.updateEmail(event)} />
                             </div>
 
-                            <div className="form-group m-2">
-                                <label>Password</label>
+                            <div className="m-2">
+                                <div className="formLabel p-1 py-2">
+                                    Password
+                                </div>
                                 <input type="password" className="form-control" placeholder="Enter password" onChange={event => this.updatePassword(event)}/>
                             </div>
 

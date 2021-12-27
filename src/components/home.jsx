@@ -13,18 +13,17 @@ class Home extends Component {
             <div>
                 <Navbar bg="dark" expand="lg" variant="dark">
                     <Container>
-                      <Navbar.Brand href="#home">Decrypto 2k21</Navbar.Brand>
+                      <Navbar.Brand href="/home">Decrypto 2k21</Navbar.Brand>
                       <Navbar.Toggle aria-controls="basic-navbar-nav" />
                       <Navbar.Collapse className="justify-content-end mx-2" id="basic-navbar-nav">
                         <Nav className="">
                           <Link className="mx-3 nav-link" to="/rules">Rules</Link>
-                          <Link className="mx-3 nav-link disabled" to="/leaderboard">Leaderboard <i class="bi bi-lock-fill"></i></Link>
-                          <Link className="mx-3 nav-link disabled" to="">Logout <i class="bi bi-lock-fill"></i></Link>
+                          <Link className="mx-3 nav-link" to="/leaderboard">Leaderboard</Link>
                         </Nav>
                       </Navbar.Collapse>
                     </Container>
                 </Navbar>
-                <h1 className="display-1 text-white my-4">Decrypto 2k21</h1>
+                <h1 className="display-1 my-4">Decrypto 2k21</h1>
                 <div>
                     <img src="https://picsum.photos/300" alt="" />
                 </div>
@@ -59,7 +58,7 @@ class Home extends Component {
                      <div class="container py-1">
                          <div class="row py-3">
                              <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
-                                 <h6 class="text-uppercase font-weight-bold mb-4 text-white">Contact</h6>
+                                 <h6 class="text-uppercase font-weight-bold mb-4">Contact</h6>
                                  <ul class="list-unstyled mb-0">
                                      <li class="">
                                          <label htmlFor="" className="text-muted mx-3">Placeholder :</label>
