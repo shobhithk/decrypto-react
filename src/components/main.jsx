@@ -7,6 +7,7 @@ import {BASE_URL} from '../App.js'
 import { Navigate, useNavigate } from 'react-router-dom';
 import Leaderboard from "./leaderboard.jsx";
 import Congratulations from "./congratulations.jsx";
+import ContestNotLive from "./contestNotLive.jsx";
 
 class Main extends React.Component {
   constructor(props){
@@ -15,12 +16,44 @@ class Main extends React.Component {
       image_url: '',
       answer: '',
       question_number: 0,
-      all_answered: false
+      all_answered: false,
+      contest_live: true,
+      startTime: null,
+      endTime: null
     }
+    
+
+    this.getStartTime()
   }
 	componentDidMount(){
 		this.fetchQuestion()
 	}
+  getStartTime(){
+    fetch(BASE_URL + "utils/start-time", {
+			method: 'GET',
+			headers: {
+				'accept': 'application/json'
+			}
+		})
+    .then(response => response.json())
+    .then(data => {
+      this.setState ({startTime: new Date(data.timestamp).getTime()})
+      this.getEndTime()
+    })
+  }
+  getEndTime(){
+    fetch(BASE_URL + "utils/end-time", {
+			method: 'GET',
+			headers: {
+				'accept': 'application/json'
+			}
+		})
+    .then(response => response.json())
+    .then(data => {
+      this.setState({endTime: new Date(data.timestamp).getTime()})
+    })
+  }
+  
 	fetchQuestion() {
 		fetch(BASE_URL + "users/question", {
 			method: 'GET',
@@ -31,6 +64,10 @@ class Main extends React.Component {
 		}).then(response => {
       if(response.redirected == true){
         this.setState({all_answered: true})
+        return
+      }
+      else if(response.status == 400){
+        this.setState({contest_live: false})
         return
       }
       response.json()
@@ -66,7 +103,15 @@ class Main extends React.Component {
       return (
         <div>
           {this.renderNavbar()}
-          <Congratulations></Congratulations>
+          <Congratulations ></Congratulations>
+        </div>
+      )
+    }
+    if(! this.state.contest_live){
+      return (
+        <div>
+          {this.renderNavbar()}
+          <ContestNotLive startTime={this.state.startTime} endTime={this.state.endTime}></ContestNotLive>
         </div>
       )
     }

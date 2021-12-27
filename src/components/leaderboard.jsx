@@ -106,7 +106,6 @@ class Leaderboard extends React.Component {
                 break
             }
         }
-        console.log(friend_info)
         if(friend_info !== null){
             document.getElementById("friend-row").innerHTML = 
                 `<td>${friend_info.rank}</td>` + 
