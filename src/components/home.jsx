@@ -23,28 +23,28 @@ class Home extends Component {
                       </Navbar.Collapse>
                     </Container>
                 </Navbar>
-                <h1 className="display-1 my-4">Decrypto 2k21</h1>
+                <h1 className="display-1 my-4">Decrypto 2k22</h1>
                 <div>
                     <img src="https://picsum.photos/300" alt="" />
                 </div>
                 
                 <Link className="container btn btn-dark m-4 w-75 p-2" to="/login">Login</Link>
                 <Link className="container btn btn-dark m-4 w-75 p-2" to="/register">Register</Link>
-                <div class="row equal">
+                <div class="row equal justify-content-between align-items-center">
                     
-                    <div class="col-sm-6 d-flex p-4">
+                    <div class="col-sm-6 d-flex p-4 justify-content-center">
                         <div class="card bg-dark text-white">
                             <div class="card-block">
                                 <h3 class="card-header">How to play?</h3>
-                                <p class="card-text p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed maxime obcaecati aliquam totam possimus maiores provident, illo minus facilis explicabo libero veniam tempora officiis ullam pariatur recusandae odio eos suscipit! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio voluptate voluptatem facilis iusto itaque laudantium enim animi laboriosam quidem totam. Error a repellat animi, doloribus aut eaque natus odio in?</p>
+                                <p class="card-text p-3">Find the relation between the images and answer</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 d-flex p-4">
+                    <div class="col-sm-6 d-flex p-4 justify-content-center">
                         <div class="card bg-dark text-white">
                             <div class="card-block">
                                 <h3 class="card-header">About LCC-JSSSTU</h3>
-                                <p class="card-text p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed maxime obcaecati aliquam totam possimus maiores provident, illo minus facilis explicabo libero veniam tempora officiis ullam pariatur recusandae odio eos suscipit! </p>
+                                <p class="card-text p-3">Linux Campus Club is the final destination for young enthusiastic minds who want to Congregate, Create and Contribute. Linux Campus Club, The only Technical Club under the department of Computer Science is a community that fosters learning new technologies from scratch and help you contribute to the open source community with that learning.</p>
                             </div>
                         </div>
                     </div>
@@ -58,30 +58,18 @@ class Home extends Component {
                      <div class="container py-1">
                          <div class="row py-3">
                              <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
-                                 <h6 class="text-uppercase font-weight-bold mb-4">Contact</h6>
+                                 <h6 class="text-uppercase font-weight-bold mb-4 text-white">Contact Us</h6>
                                  <ul class="list-unstyled mb-0">
                                      <li class="">
-                                         <label htmlFor="" className="text-muted mx-3">Placeholder :</label>
-                                         <a href="tel:#" class="text-muted ">9999988888</a>
+                                         <a href="https://www.instagram.com/linuxcampusclub/" class="text-muted ">Instagram</a>
                                      </li>
                                      <li class="">
-                                         <label htmlFor="" className="text-muted mx-3">Placeholder :</label>
-                                         <a href="tel:#" class="text-muted ">9999988888</a>
+                                         <a href="https://discord.gg/xJakYxv5" class="text-muted ">Discord server</a>
                                      </li>
                                  </ul>
                              </div>
 
-                             <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
-                                 <h6 class="text-uppercase font-weight-bold mb-4 text-white">Developed by</h6>
-                                 <ul class="list-unstyled mb-0">
-                                     <li class="">
-                                         <div className="text-muted">AAAAAA</div>
-                                     </li>
-                                     <li class="">
-                                         <div className="text-muted">AAAAAA</div>
-                                     </li>
-                                 </ul>
-                             </div>
+                             <div class="col-lg-6 col-md-6 mb-1 mb-lg-0"><h6 class="text-uppercase font-weight-bold mb-4 text-white">Developed by</h6><ul class="list-unstyled mb-0"><li class=""><a href="https://www.instagram.com/varun.1311/" class="text-muted">Varun kumar</a></li><li class=""><a href="https://www.instagram.com/abhay_20___/" class="text-muted">Abhay Chandir</a></li><li class=""><a href="https://github.com/SanchithHegde/" class="text-muted">Sanchith Hegde</a></li></ul></div>
                          </div>
                          <hr />
                          

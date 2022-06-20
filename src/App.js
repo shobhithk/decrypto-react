@@ -63,5 +63,5 @@ class App extends Component {
 //   );
 // }
 
-export const BASE_URL = "http://152.67.25.103/api/";
+export const BASE_URL = "http://35.87.200.114/api/";
 export default App;

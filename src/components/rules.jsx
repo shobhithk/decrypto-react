@@ -22,6 +22,9 @@ class Rules extends Component {
                   </Navbar.Collapse>
                 </Container>
             </Navbar>
+            <div>
+            <ol class="m-4 list-group list-group-flush list-group-numbered"><li class="list-group-item">Every level has a set of images and/text</li><li class="list-group-item">You are free to use anything from your brains to Google to solve questions</li><li class="list-group-item">Type in your answer in the box provided. Answers contain only small letters and numbers. <strong>No space to separate words.</strong> </li><li class="list-group-item">Don't use any special characters/symbols in the answer(just skip them if they are part of answer)</li><li class="list-group-item">In case of a tie, the person who has submitted first will be on top</li></ol>
+            </div>
             </Fragment>
         );
     }
