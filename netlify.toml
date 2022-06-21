@@ -1,7 +1,7 @@
 [build]
   command = "npm run build"
-  publish="react-decrypto/build"
-  base = "react-decrypto"
+  publish="/build"
+  base = ""
 
 [[redirects]]
   from = "/*"
