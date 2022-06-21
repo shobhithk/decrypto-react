@@ -1,11 +1,10 @@
-import React, { Component, Fragment } from "react";
-import $, { timers } from 'jquery';
+import React, {Fragment } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { Navigate } from "react-router-dom";
 import { BASE_URL } from "../App";
 import 'bootstrap/dist/css/bootstrap.css';
-import {Navbar, Container, Nav, Image} from 'react-bootstrap';
+import {Navbar, Container, Nav} from 'react-bootstrap';
 import logo from '../images/lcc_icon.png'
 
 class Register extends React.Component {
@@ -109,13 +108,13 @@ class Register extends React.Component {
             let status = response.status
             response.json()
             .then(data => {
-                if(status == 400){
+                if(status === 400){
                     toast.error(data.detail)
                 }
-                else if(status == 422){
+                else if(status === 422){
                     toast.error(data.detail[0].msg)
                 }
-                else if(status == 200){
+                else if(status === 200){
                     this.setState({redirect: "/login"})
                 }
             })

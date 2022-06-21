@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { Component} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
-import {Navbar, Container, Nav, Image} from 'react-bootstrap';
+import {Navbar, Container, Nav} from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 class Home extends Component {

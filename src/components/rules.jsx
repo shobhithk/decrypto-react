@@ -1,7 +1,7 @@
 import React, {Component, Fragment } from 'react';
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
-import {Navbar, Container, Nav, Image} from 'react-bootstrap'
+import {Navbar, Container, Nav} from 'react-bootstrap'
 class Rules extends Component {
     constructor(props) {
         super(props);

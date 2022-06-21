@@ -1,11 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.css';
-import {Navbar, Container, Nav, Image, Button} from 'react-bootstrap'
+import {Navbar, Container, Nav, Image} from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import {BASE_URL} from '../App.js'
-import { Navigate, useNavigate } from 'react-router-dom';
-import Leaderboard from "./leaderboard.jsx";
 import Congratulations from "./congratulations.jsx";
 import ContestNotLive from "./contestNotLive.jsx";
 import Countdown from 'react-countdown';
@@ -63,11 +61,11 @@ class Main extends React.Component {
 				'accept': 'application/json'
 			}
 		}).then(response => {
-      if(response.redirected == true){
+      if(response.redirected === true){
         this.setState({all_answered: true})
         return
       }
-      else if(response.status == 400){
+      else if(response.status === 400){
         this.setState({contest_live: false})
         return
       }
@@ -90,7 +88,7 @@ class Main extends React.Component {
           'accept': 'application/json'
       }
       }).then(response => {
-          if(response.status == 200){
+          if(response.status === 200){
               response.json()
               .then(data => {
                   this.setState({question_number: data.question_number})
@@ -200,11 +198,11 @@ class Main extends React.Component {
 			},
       body: data
 		}).then(response => {
-      if(response.status == 400){
+      if(response.status === 400){
         response.json()
         .then(data => toast.error(data.detail))
       }
-      else if(response.status == 200){
+      else if(response.status === 200){
         response.json()
         .then(data => {
           this.fetchQuestion()

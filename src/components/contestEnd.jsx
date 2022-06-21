@@ -17,7 +17,7 @@ class ContestEnd extends Component {
               'accept': 'application/json'
           }
           }).then(response => {
-              if(response.status == 200){
+              if(response.status === 200){
                   response.json()
                   .then(data => {
                       this.setState({

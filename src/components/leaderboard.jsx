@@ -1,8 +1,7 @@
 import React, { Fragment } from "react";
 import { BASE_URL } from "../App";
-import { Navigate, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import {Navbar, Container, Nav, Image, Button} from 'react-bootstrap';
+import {Navbar, Container, Nav} from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 
@@ -32,7 +31,7 @@ class Leaderboard extends React.Component {
             }
         }).then(response => response.json())
         .then(data => {
-            if(data.length != 0){
+            if(data.length !== 0){
                 console.log(data)
                 this.setState({rank_list: data})
             }

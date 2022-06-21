@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import { Navigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import { BASE_URL } from "../App";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
-import {Navbar, Container, Nav, Image} from 'react-bootstrap'
+import {Navbar, Container, Nav} from 'react-bootstrap'
 import logo from '../images/lcc_icon.png'
 
 
@@ -90,11 +90,11 @@ class Login extends React.Component {
             body: formData
         })
         .then((response) => {
-            if(response.status == 400){
+            if(response.status === 400){
                 response.json()
                 .then(data => toast.error(data.detail))
             }
-            else if(response.status == 200){
+            else if(response.status === 200){
                 response.json()
                 .then(data => {
                     localStorage.setItem('access-token', data.access_token)
@@ -113,7 +113,7 @@ class Login extends React.Component {
                 'accept': 'application/json'
 			}
         }).then(response => {
-            if(response.status == 200){
+            if(response.status === 200){
                 response.json()
                 .then(data => {
                     localStorage.setItem('full_name', data.full_name)
