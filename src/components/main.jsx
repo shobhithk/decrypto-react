@@ -130,7 +130,7 @@ class Main extends React.Component {
                 {this.renderCountdown()}
                 
                 
-                <div className="h3 text-white">Question {this.state.question_number}</div>
+                <div className="h3">Question {this.state.question_number}</div>
                 <div className="d-flex align-items-center justify-content-center" style={{height: "85%"}}>
                   <Image id="questionImage" className="" src={this.state.image_url} />
                 </div>
@@ -165,7 +165,7 @@ class Main extends React.Component {
     return (
       <Navbar bg="dark" expand="lg" variant="dark">
                 <Container>
-                  <Navbar.Brand href="#home">Decrypto 2k21</Navbar.Brand>
+                  <Navbar.Brand href="/question">Decrypto 2k22</Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse className="justify-content-end mx-2" id="basic-navbar-nav">
                     <Nav className="">
