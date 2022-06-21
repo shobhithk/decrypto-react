@@ -2,6 +2,7 @@ import React, { Component} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import {Navbar, Container, Nav} from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import decfront from "../images/decfront.jpeg"
 
 class Home extends Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class Home extends Component {
                 </Navbar>
                 <h1 className="display-1 my-4">Decrypto 2k22</h1>
                 <div>
-                    <img src="https://picsum.photos/300" alt="" />
+                    <img width={"50%"} height={"50%"} src={decfront} alt="" />
                 </div>
                 
                 <Link className="container btn btn-dark m-4 w-75 p-2" to="/login">Login</Link>

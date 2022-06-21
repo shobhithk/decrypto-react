@@ -1,6 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import {Navbar, Container, Nav, Image} from 'react-bootstrap'
+import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import {BASE_URL} from '../App.js'
@@ -18,13 +19,17 @@ class Main extends React.Component {
       all_answered: false,
       contest_live: true,
       startTime: null,
-      endTime: null
+      endTime: null,
+      redirect: null
     }
     
 
     this.getStartTime()
   }
 	componentDidMount(){
+    if(localStorage.getItem("access-token")===null){
+      this.setState({redirect: "/login"})
+    }
 		this.fetchQuestion()
 	}
   getStartTime(){
@@ -97,6 +102,9 @@ class Main extends React.Component {
       })
   }
   render() {
+    if (this.state.redirect) {
+      return <Navigate to={this.state.redirect} />
+  }
     
     if(this.state.all_answered){
       return (
@@ -165,7 +173,7 @@ class Main extends React.Component {
     return (
       <Navbar bg="dark" expand="lg" variant="dark">
                 <Container>
-                  <Navbar.Brand href="/question">Decrypto 2k22</Navbar.Brand>
+                  <Navbar.Brand href="">Decrypto 2k22</Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse className="justify-content-end mx-2" id="basic-navbar-nav">
                     <Nav className="">
