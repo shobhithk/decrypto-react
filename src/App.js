@@ -1,6 +1,6 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Login from "./components/login";
 import Register from "./components/register";
@@ -62,5 +62,5 @@ class App extends Component {
 //   );
 // }
 
-export const BASE_URL = "http://35.87.200.114/api/";
+export const BASE_URL = "https://decryptobackend.ga/api/";
 export default App;

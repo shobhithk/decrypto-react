@@ -31,7 +31,7 @@ class ContestEnd extends Component {
     render() { 
         return ( 
             <div className=' align-items-center'>
-               <div className='display-1 text-white'>
+               <div className='display-1'>
                    Contest Ended
                </div>
                <div className='m-5 d-felx align-items-center justify-content-center'>

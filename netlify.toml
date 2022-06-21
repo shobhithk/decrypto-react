@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish="react-decrypto/build"
+  base = "react-decrypto"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
