@@ -24,7 +24,7 @@ class Leaderboard extends React.Component {
         this.getCurrentUserInfo()
     }
     fetchLeaderboard(){
-        fetch(BASE_URL + "users/leaderboard?skip=0&limit=500", {
+        fetch(BASE_URL + "users/leaderboard?skip=0&limit=200", {
             method: 'GET',
             headers: {
                 'accept': 'application/json'
