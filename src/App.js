@@ -62,5 +62,5 @@ class App extends Component {
 //   );
 // }
 
-export const BASE_URL = "http://35.89.204.167/api/v1/";
+export const BASE_URL = "https://decryptobackend.live/api/v1/";
 export default App;
