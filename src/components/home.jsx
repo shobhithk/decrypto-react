@@ -2,7 +2,7 @@ import React, { Component} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import {Navbar, Container, Nav} from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import decfront from "../images/decfront.jpeg"
+import decfront from "../images/decrypto2023.jpg"
 
 class Home extends Component {
     constructor(props) {
