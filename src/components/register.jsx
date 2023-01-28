@@ -27,7 +27,7 @@ class Register extends React.Component {
             <Fragment>
             <Navbar bg="dark" expand="lg" variant="dark">
                 <Container>
-                  <Navbar.Brand href="/home">Decrypto 2k22</Navbar.Brand>
+                  <Navbar.Brand href="/home">Decrypto 2k23</Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse className="justify-content-end mx-2" id="basic-navbar-nav">
                     <Nav className="">
