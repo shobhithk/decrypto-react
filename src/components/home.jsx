@@ -24,7 +24,7 @@ class Home extends Component {
                       </Navbar.Collapse>
                     </Container>
                 </Navbar>
-                <h1 className="display-1 my-4">Decrypto 2k22</h1>
+                <h1 className="display-1 my-4">Decrypto 2k23</h1>
                 <div>
                     <img width={"50%"} height={"50%"} src={decfront} alt="" />
                 </div>
